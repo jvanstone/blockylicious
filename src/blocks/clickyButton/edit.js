@@ -30,8 +30,7 @@ export default function Edit(props) {
 		[props.attributes.postType],
 	);
 	const blockProps = useBlockProps();
-	console.log(postTypes);
-	console.log(posts);
+
 	return (
 		<>
 			<InspectorControls>

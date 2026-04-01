@@ -56,5 +56,5 @@
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"render": "file:./render.php",
-	"parent": "blockylicious/clicky-group"
+	"parent": ["blockylicious/clicky-group"]
 }

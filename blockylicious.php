@@ -22,10 +22,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 final class Blockylicious {
 	static function init() {
+
+		add_action( 'enqueue_block_assets', function () {
+			wp_enqueue_style( "dashicons" );
+		});
+	
 		add_action('init', function(){
 			add_filter( 'block_categories_all', [self::class, 'create_custom_block_category'] );
 			wp_register_block_types_from_metadata_collection( __DIR__ . '/build/blocks/', __DIR__ . '/build/blocks-manifest.php' );
-		});
+	/* 		register_block_type( __DIR__ . '/build/blocks/clickyGroup' );
+			register_block_type( __DIR__ . '/build/blocks/clickyButton' );
+			register_block_type( __DIR__ . '/build/blocks/piccyGallery' );
+			register_block_type( __DIR__ . '/build/blocks/piccyImage' );
+			register_block_type( __DIR__ . '/build/blocks/curvy' ); */
+			});
 	}
 
 	public static function convert_custom_properties($value)
