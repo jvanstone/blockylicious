@@ -26,7 +26,12 @@ final class Blockylicious {
 		add_action( 'enqueue_block_assets', function () {
 			wp_enqueue_style( "dashicons" );
 		});
-	
+
+		add_action( 'enqueue_block_assets', function () {
+			$style_url = plugins_url( "build/style-index.css", __FILE__ );
+
+			wp_enqueue_style( 'blockylicious-style', $style_url, array() );
+		} );
 		add_action('init', function(){
 			add_filter( 'block_categories_all', [self::class, 'create_custom_block_category'] );
 			wp_register_block_types_from_metadata_collection( __DIR__ . '/build/blocks/', __DIR__ . '/build/blocks-manifest.php' );
@@ -59,7 +64,24 @@ final class Blockylicious {
 					<!-- wp:paragraph -->
 					<p></p>
 					<!-- /wp:paragraph -->' 
-			) );
+			));
+
+		
+			});
+
+			add_action('enqueue_block_editor_assets', function() {
+				$script_url = plugins_url("build/index.js", __FILE__);
+				wp_enqueue_script(
+					'blockylicious-index',
+					$script_url,
+					array('wp-blocks', 'wp-element', 'wp-editor'),
+					null,
+					true
+				);
+
+				$style_url = plugins_url("build/style-index.css", __FILE__);
+
+				wp_enqueue_style( 'blockylicious-style', $style_url, array() );
 			});
 	}
 
